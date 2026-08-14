@@ -51,7 +51,7 @@ Convenção: `CT-<área>-<número>`. Status possíveis: Passou, Falhou, Bloquead
 ### CT-DESP-04 — Criar despesa com valor igual a zero
 - **Passos:** `POST /despesas` com `valor: 0`
 - **Resultado esperado:** status 400 (valor deve ser maior que zero)
-- **Status:** Passou (validado manualmente via Swagger)
+- **Status:** Passou (coberto por teste automatizado)
 
 ### CT-DESP-05 — Criar despesa com categoria inválida
 - **Resultado esperado:** status 400
@@ -64,7 +64,7 @@ Convenção: `CT-<área>-<número>`. Status possíveis: Passou, Falhou, Bloquead
 ### CT-DESP-07 — Filtrar despesas por categoria
 - **Passos:** criar despesas em categorias diferentes; `GET /despesas?categoria=lazer`
 - **Resultado esperado:** apenas despesas da categoria informada são retornadas
-- **Status:** Passou (validado manualmente via Swagger)
+- **Status:** Passou (coberto por teste automatizado)
 
 ### CT-DESP-08 — Acessar despesa de outro usuário pelo id
 - **Resultado esperado:** status 403
@@ -81,7 +81,7 @@ Convenção: `CT-<área>-<número>`. Status possíveis: Passou, Falhou, Bloquead
 ### CT-DESP-11 — Excluir despesa já excluída
 - **Passos:** excluir uma despesa; repetir a exclusão do mesmo id
 - **Resultado esperado:** status 404 na segunda tentativa
-- **Status:** Passou (validado manualmente via Swagger)
+- **Status:** Passou (coberto por teste automatizado)
 
 ### CT-DESP-12 — Resumo mensal soma corretamente por categoria
 - **Resultado esperado:** `totalGeral` e `totalPorCategoria` corretos, ignorando despesas de outros meses
@@ -91,7 +91,22 @@ Convenção: `CT-<área>-<número>`. Status possíveis: Passou, Falhou, Bloquead
 - **Resultado esperado:** status 400
 - **Status:** Passou (coberto por teste automatizado)
 
-## Gaps encontrados (ver Issues no repositório)
-- Não existe endpoint para **editar** uma despesa, embora o contexto original da aplicação previsse essa permissão (ver Issue de bug correspondente)
-- Cadastro de usuário não valida formato de email
-- `JWT_SECRET` possui valor padrão fixo no código-fonte, usado caso a variável de ambiente não seja definida
+## Gaps encontrados
+
+Todos os bugs e gaps abaixo foram documentados como Issues no repositório (label `bug`) e organizados no [Project board](https://github.com/users/maiayuri/projects/1), sem correção — conforme orientação da mentoria.
+
+| Issue | Descrição |
+|---|---|
+| [#1](https://github.com/maiayuri/PPP-mentoria-2026/issues/1) | Falta endpoint de edição (PUT) de despesa |
+| [#2](https://github.com/maiayuri/PPP-mentoria-2026/issues/2) | Cadastro de usuário não valida nem normaliza o email |
+| [#3](https://github.com/maiayuri/PPP-mentoria-2026/issues/3) | Campo `data` da despesa não valida formato de data |
+| [#4](https://github.com/maiayuri/PPP-mentoria-2026/issues/4) | Parâmetro `mes` não valida formato/intervalo |
+| [#5](https://github.com/maiayuri/PPP-mentoria-2026/issues/5) | JSON malformado retorna 500 em vez de 400 |
+| [#6](https://github.com/maiayuri/PPP-mentoria-2026/issues/6) | `JWT_SECRET` com valor padrão hardcoded no código-fonte |
+| [#7](https://github.com/maiayuri/PPP-mentoria-2026/issues/7) | Email tratado como case-sensitive, permite cadastro duplicado |
+| [#8](https://github.com/maiayuri/PPP-mentoria-2026/issues/8) | Erro de precisão de ponto flutuante no resumo mensal |
+| [#9](https://github.com/maiayuri/PPP-mentoria-2026/issues/9) | Campo `valor` sem limite máximo |
+| [#10](https://github.com/maiayuri/PPP-mentoria-2026/issues/10) | Payload grande retorna 500 em vez de 413 |
+| [#11](https://github.com/maiayuri/PPP-mentoria-2026/issues/11) | Login sem rate limiting / proteção contra força bruta |
+
+Ver as sessões exploratórias completas em [`docs/exploratorios/`](exploratorios/) para os passos de reprodução de cada um.
