@@ -1,6 +1,6 @@
 # API de Controle de Gastos Pessoais
 
-![CI](https://github.com/maiayuri/PPP-mentoria-2026/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/maiayuri/PPP-mentoria-2026-controle-de-gastos/actions/workflows/ci.yml/badge.svg)
 
 Projeto de portfólio da mentoria de testes de software: uma API simples de controle de gastos pessoais, com cadastro de despesas e resumo mensal por categoria. O escopo foi mantido propositalmente enxuto, já que o foco do projeto está nas atividades de teste realizadas em cima da aplicação, não na aplicação em si.
 
@@ -99,6 +99,6 @@ prompts.md        -> prompt usado para gerar o esqueleto do projeto
 
 Ao longo das sessões exploratórias e da revisão de código, foram identificados 11 bugs/gaps reais. Nenhum foi corrigido intencionalmente — cada um foi documentado como Issue e organizado no [board do projeto](https://github.com/users/maiayuri/projects/1), já que o objetivo dessa etapa é demonstrar a capacidade de encontrar e reportar problemas, não necessariamente resolvê-los.
 
-[Ver as issues de bug](https://github.com/maiayuri/PPP-mentoria-2026/issues?q=is%3Aissue+label%3Abug)
+[Ver as issues de bug](https://github.com/maiayuri/PPP-mentoria-2026-controle-de-gastos/issues?q=is%3Aissue+label%3Abug)
 
 Os passos de reprodução de cada um estão em [`docs/casos-de-teste.md`](docs/casos-de-teste.md#gaps-encontrados).

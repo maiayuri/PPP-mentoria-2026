@@ -59,6 +59,6 @@ Content-Type: application/json; charset=utf-8
 ```
 
 ## Referências cruzadas
-- Bugs encontrados durante exploração: [`docs/exploratorios/`](../exploratorios/) e [Issues do repositório](https://github.com/maiayuri/PPP-mentoria-2026/issues)
+- Bugs encontrados durante exploração: [`docs/exploratorios/`](../exploratorios/) e [Issues do repositório](https://github.com/maiayuri/PPP-mentoria-2026-controle-de-gastos/issues)
 - Resultado do teste de performance: [`docs/performance-resultado.md`](../performance-resultado.md)
 - Suíte automatizada: `npm test` (19 testes) e `npm run test:coverage` (relatório de cobertura)

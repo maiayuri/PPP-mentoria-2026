@@ -97,16 +97,16 @@ Esses são os bugs e gaps que fui encontrando ao longo do caminho (a maioria nas
 
 | Issue | Descrição |
 |---|---|
-| [#1](https://github.com/maiayuri/PPP-mentoria-2026/issues/1) | Falta endpoint de edição (PUT) de despesa |
-| [#2](https://github.com/maiayuri/PPP-mentoria-2026/issues/2) | Cadastro de usuário não valida nem normaliza o email |
-| [#3](https://github.com/maiayuri/PPP-mentoria-2026/issues/3) | Campo `data` da despesa não valida formato de data |
-| [#4](https://github.com/maiayuri/PPP-mentoria-2026/issues/4) | Parâmetro `mes` não valida formato/intervalo |
-| [#5](https://github.com/maiayuri/PPP-mentoria-2026/issues/5) | JSON malformado retorna 500 em vez de 400 |
-| [#6](https://github.com/maiayuri/PPP-mentoria-2026/issues/6) | `JWT_SECRET` com valor padrão hardcoded no código-fonte |
-| [#7](https://github.com/maiayuri/PPP-mentoria-2026/issues/7) | Email tratado como case-sensitive, permite cadastro duplicado |
-| [#8](https://github.com/maiayuri/PPP-mentoria-2026/issues/8) | Erro de precisão de ponto flutuante no resumo mensal |
-| [#9](https://github.com/maiayuri/PPP-mentoria-2026/issues/9) | Campo `valor` sem limite máximo |
-| [#10](https://github.com/maiayuri/PPP-mentoria-2026/issues/10) | Payload grande retorna 500 em vez de 413 |
-| [#11](https://github.com/maiayuri/PPP-mentoria-2026/issues/11) | Login sem rate limiting / proteção contra força bruta |
+| [#1](https://github.com/maiayuri/PPP-mentoria-2026-controle-de-gastos/issues/1) | Falta endpoint de edição (PUT) de despesa |
+| [#2](https://github.com/maiayuri/PPP-mentoria-2026-controle-de-gastos/issues/2) | Cadastro de usuário não valida nem normaliza o email |
+| [#3](https://github.com/maiayuri/PPP-mentoria-2026-controle-de-gastos/issues/3) | Campo `data` da despesa não valida formato de data |
+| [#4](https://github.com/maiayuri/PPP-mentoria-2026-controle-de-gastos/issues/4) | Parâmetro `mes` não valida formato/intervalo |
+| [#5](https://github.com/maiayuri/PPP-mentoria-2026-controle-de-gastos/issues/5) | JSON malformado retorna 500 em vez de 400 |
+| [#6](https://github.com/maiayuri/PPP-mentoria-2026-controle-de-gastos/issues/6) | `JWT_SECRET` com valor padrão hardcoded no código-fonte |
+| [#7](https://github.com/maiayuri/PPP-mentoria-2026-controle-de-gastos/issues/7) | Email tratado como case-sensitive, permite cadastro duplicado |
+| [#8](https://github.com/maiayuri/PPP-mentoria-2026-controle-de-gastos/issues/8) | Erro de precisão de ponto flutuante no resumo mensal |
+| [#9](https://github.com/maiayuri/PPP-mentoria-2026-controle-de-gastos/issues/9) | Campo `valor` sem limite máximo |
+| [#10](https://github.com/maiayuri/PPP-mentoria-2026-controle-de-gastos/issues/10) | Payload grande retorna 500 em vez de 413 |
+| [#11](https://github.com/maiayuri/PPP-mentoria-2026-controle-de-gastos/issues/11) | Login sem rate limiting / proteção contra força bruta |
 
 Ver as sessões exploratórias completas em [`docs/exploratorios/`](exploratorios/) para os passos de reprodução de cada um.
