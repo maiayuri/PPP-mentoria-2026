@@ -9,7 +9,7 @@ Rodei um script Node com `fetch` + `Promise.all`, levou uns 15 minutos.
 | # | Ação | Esperado | Observado | Veredito |
 |---|---|---|---|---|
 | 1 | Disparar 10 registros simultâneos com o mesmo email | Apenas 1 deveria ter sucesso (201), os demais 409 | Exatamente 1 sucesso (201), 9 com 409 | OK — sem condição de corrida no registro |
-| 2 | Disparar 30 tentativas de login com senha errada em sequência rápida, para o mesmo usuário | Deveria haver algum bloqueio/limite (ex: 429) a partir de N tentativas | Todas as 30 retornaram 401, nenhuma bloqueada | 🐞 Gap — ver Issue "sem rate limiting no login" |
+| 2 | Disparar 30 tentativas de login com senha errada em sequência rápida, para o mesmo usuário | Deveria haver algum bloqueio/limite (ex: 429) a partir de N tentativas | Todas as 30 retornaram 401, nenhuma bloqueada | 🐞 Gap — [Issue #11](https://github.com/maiayuri/PPP-mentoria-2026-controle-de-gastos/issues/11) |
 | 3 | Disparar 5 exclusões simultâneas da mesma despesa | Apenas 1 deveria ter sucesso (204), as demais 404 | Exatamente 1 sucesso (204), 4 com 404 | OK — sem condição de corrida na exclusão |
 
 ## Resumo da sessão

@@ -12,13 +12,13 @@ Rodei isso por uns 30 minutos, com a API local (`npm run dev`) e o curl.
 
 | # | Ação | Esperado | Observado | Veredito |
 |---|---|---|---|---|
-| 1 | `GET /despesas/resumo?mes=2026-13` (mês 13 não existe) | 400 (mês inválido) | 200, retorna resumo vazio silenciosamente | 🐞 Bug — ver Issue "resumo/filtro não valida formato do mês" |
+| 1 | `GET /despesas/resumo?mes=2026-13` (mês 13 não existe) | 400 (mês inválido) | 200, retorna resumo vazio silenciosamente | 🐞 Bug — [Issue #4](https://github.com/maiayuri/PPP-mentoria-2026-controle-de-gastos/issues/4) |
 | 2 | `POST /despesas` com `categoria: "Alimentacao"` (maiúscula) | 400 (categoria não bate com a lista) | 400 | OK |
 | 3 | `POST /despesas` com `valor: "10"` (string numérica) | 400 (tipo incorreto) | 400 | OK |
-| 4 | `POST /despesas` com `data: "ontem"` (não é uma data real) | 400 (data inválida) | 201, despesa criada com `data: "ontem"` | 🐞 Bug — ver Issue "campo data não valida formato" |
+| 4 | `POST /despesas` com `data: "ontem"` (não é uma data real) | 400 (data inválida) | 201, despesa criada com `data: "ontem"` | 🐞 Bug — [Issue #3](https://github.com/maiayuri/PPP-mentoria-2026-controle-de-gastos/issues/3) |
 | 5 | Requisição autenticada com header `Authorization: Bearer` (sem token) | 401 | 401 | OK |
-| 6 | `POST /despesas` com corpo JSON malformado (`{valor:10,}`) | 400 (Bad Request) | 500 (Internal Server Error) | 🐞 Bug — ver Issue "JSON malformado retorna 500" |
-| 7 | Registro com email contendo espaços (`"  espaco@teste.com  "`) | Deveria normalizar (trim) ou rejeitar | Salvo literalmente com espaços; login subsequente com o email "limpo" falha com 401 | 🐞 Bug — ver Issue "email não é validado/normalizado" |
+| 6 | `POST /despesas` com corpo JSON malformado (`{valor:10,}`) | 400 (Bad Request) | 500 (Internal Server Error) | 🐞 Bug — [Issue #5](https://github.com/maiayuri/PPP-mentoria-2026-controle-de-gastos/issues/5) |
+| 7 | Registro com email contendo espaços (`"  espaco@teste.com  "`) | Deveria normalizar (trim) ou rejeitar | Salvo literalmente com espaços; login subsequente com o email "limpo" falha com 401 | 🐞 Bug — [Issue #2](https://github.com/maiayuri/PPP-mentoria-2026-controle-de-gastos/issues/2) |
 
 ## Resumo da sessão
 Testei 7 variações e 4 deram problema — mais do que eu esperava, sinceramente. Os itens 1, 4 e 7 mostram que faltou validar formato mesmo (mês, data, email). O item 6 me chamou mais atenção: um JSON mal formado quebra o parser e o erro vaza como 500, quando deveria ser um 400 simples (culpa é do cliente, não do servidor).
