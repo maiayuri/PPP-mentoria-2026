@@ -48,6 +48,17 @@ describe("Despesas", () => {
     expect(res.status).toBe(400);
   });
 
+  it("não deve criar despesa com valor igual a zero", async () => {
+    const token = await criarUsuarioAutenticado("despesa-valor-zero@exemplo.com");
+
+    const res = await request(app)
+      .post("/despesas")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ valor: 0, categoria: "transporte", data: "2026-08-10" });
+
+    expect(res.status).toBe(400);
+  });
+
   it("não deve criar despesa com categoria inválida", async () => {
     const token = await criarUsuarioAutenticado("despesa3@exemplo.com");
 
@@ -73,6 +84,28 @@ describe("Despesas", () => {
 
     expect(resA.body.length).toBe(1);
     expect(resB.body.length).toBe(0);
+  });
+
+  it("deve filtrar despesas por categoria", async () => {
+    const token = await criarUsuarioAutenticado("filtro-categoria@exemplo.com");
+
+    await request(app)
+      .post("/despesas")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ valor: 20, categoria: "lazer", data: "2026-08-01" });
+
+    await request(app)
+      .post("/despesas")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ valor: 40, categoria: "transporte", data: "2026-08-02" });
+
+    const res = await request(app)
+      .get("/despesas?categoria=lazer")
+      .set("Authorization", `Bearer ${token}`);
+
+    expect(res.status).toBe(200);
+    expect(res.body.length).toBe(1);
+    expect(res.body[0].categoria).toBe("lazer");
   });
 
   it("não deve permitir que um usuário acesse a despesa de outro usuário", async () => {
@@ -120,6 +153,25 @@ describe("Despesas", () => {
       .set("Authorization", `Bearer ${token}`);
 
     expect(resGet.status).toBe(404);
+  });
+
+  it("deve retornar 404 ao tentar excluir uma despesa já excluída", async () => {
+    const token = await criarUsuarioAutenticado("despesa-excluir-duas-vezes@exemplo.com");
+
+    const criada = await request(app)
+      .post("/despesas")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ valor: 15, categoria: "outros", data: "2026-08-02" });
+
+    await request(app)
+      .delete(`/despesas/${criada.body.id}`)
+      .set("Authorization", `Bearer ${token}`);
+
+    const segundaExclusao = await request(app)
+      .delete(`/despesas/${criada.body.id}`)
+      .set("Authorization", `Bearer ${token}`);
+
+    expect(segundaExclusao.status).toBe(404);
   });
 
   it("deve calcular o resumo mensal por categoria corretamente", async () => {
