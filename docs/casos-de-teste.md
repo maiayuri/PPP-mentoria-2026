@@ -1,6 +1,6 @@
 # Casos de Teste — API de Controle de Gastos Pessoais
 
-Convenção: `CT-<área>-<número>`. Status possíveis: Passou, Falhou, Bloqueado.
+Aqui estão os casos de teste que escrevi pra cobrir os fluxos principais da API. Uso a convenção `CT-<área>-<número>` e cada caso tem status Passou, Falhou ou Bloqueado. Boa parte acabei automatizando com Jest/Supertest conforme fui evoluindo a suíte; os que ficaram só como validação manual, deixei marcado.
 
 ## Autenticação
 
@@ -93,7 +93,7 @@ Convenção: `CT-<área>-<número>`. Status possíveis: Passou, Falhou, Bloquead
 
 ## Gaps encontrados
 
-Todos os bugs e gaps abaixo foram documentados como Issues no repositório (label `bug`) e organizados no [Project board](https://github.com/users/maiayuri/projects/1), sem correção — conforme orientação da mentoria.
+Esses são os bugs e gaps que fui encontrando ao longo do caminho (a maioria nas sessões exploratórias, alguns só de ler o código). Abri uma Issue pra cada um (label `bug`) e organizei no [board do projeto](https://github.com/users/maiayuri/projects/1). Não corrigi nenhum de propósito, já que o combinado era documentar e não mexer.
 
 | Issue | Descrição |
 |---|---|

@@ -1,8 +1,8 @@
 # Evidências de execução da API
 
-Evidências reais, capturadas executando a aplicação localmente (`npm run dev`) e fazendo requisições HTTP reais com `curl`. Complementam os casos de teste em [`docs/casos-de-teste.md`](../casos-de-teste.md). Para testes manuais interativos, também está disponível a collection do Postman em [`resources/postman-collection.json`](../../resources/postman-collection.json).
+Print de comando não é muito prático de versionar num repositório, então preferi capturar o request/response real via `curl` rodando a API local (`npm run dev`) e colar aqui, sem editar nada. É pra provar que os fluxos abaixo realmente funcionam, não só "no papel" nos casos de teste em [`docs/casos-de-teste.md`](../casos-de-teste.md). Pra quem preferir clicar em vez de ler curl, montei também uma collection do Postman em [`resources/postman-collection.json`](../../resources/postman-collection.json).
 
-**Data da execução:** 2026-08-14
+**Rodado em:** 2026-08-14
 
 ## 1. Registro de usuário — `POST /auth/registro`
 

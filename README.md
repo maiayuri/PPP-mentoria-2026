@@ -2,9 +2,9 @@
 
 ![CI](https://github.com/maiayuri/PPP-mentoria-2026/actions/workflows/ci.yml/badge.svg)
 
-Projeto de portfólio pessoal da mentoria de testes de software. A aplicação foi criada com auxílio de IA generativa (GitHub Copilot) a partir do prompt em [prompts.md](./prompts.md); o foco do projeto está nas atividades de teste e qualidade de software realizadas em cima dela.
+Esse é o meu projeto de portfólio da mentoria de testes de software. A ideia era simples: uma API pra controlar meus próprios gastos, com cadastro de despesas e um resumo mensal por categoria — nada muito elaborado, porque o objetivo aqui não é a aplicação em si.
 
-API REST para cadastro de usuários e controle de despesas pessoais, com resumo mensal de gastos por categoria.
+Segui a orientação da mentoria e usei o GitHub Copilot só pra gerar o esqueleto da aplicação a partir do prompt que está em [prompts.md](./prompts.md) (isso poupou bastante tempo). Daí em diante, todo o trabalho de teste — plano, casos de teste, sessões exploratórias, automação, performance e os bugs que encontrei — foi feito por mim.
 
 ## Índice
 
@@ -59,13 +59,13 @@ Documentação interativa (Swagger UI): `http://localhost:3000/docs`
 | `npm run test:coverage` | Roda a suíte com relatório de cobertura de código |
 | `npm run test:performance` | Roda um teste de carga (autocannon) contra `GET /despesas` e salva o resultado em `docs/performance-resultado.md` |
 
-Documentação de teste completa:
+O grosso do trabalho está documentado em `docs/`:
 
 - [`docs/plano-de-testes.md`](docs/plano-de-testes.md) — escopo e estratégia
 - [`docs/casos-de-teste.md`](docs/casos-de-teste.md) — casos de teste manuais e automatizados
-- [`docs/exploratorios/`](docs/exploratorios/) — sessões de teste exploratório (charters e notas)
-- [`docs/evidencias/`](docs/evidencias/) — evidências reais de execução da API
-- [`resources/postman-collection.json`](resources/postman-collection.json) — collection para testes manuais no Postman/Insomnia
+- [`docs/exploratorios/`](docs/exploratorios/) — minhas sessões de teste exploratório (charters e anotações)
+- [`docs/evidencias/`](docs/evidencias/) — evidências de execução da API
+- [`resources/postman-collection.json`](resources/postman-collection.json) — collection que usei pros testes manuais
 
 ## Estrutura do projeto
 
@@ -84,7 +84,7 @@ resources/
   swagger.json           -> especificação OpenAPI da API
   postman-collection.json -> collection para testes manuais
 .github/workflows/ci.yml -> pipeline de integração contínua
-prompts.md        -> prompt usado para gerar o projeto com IA
+prompts.md        -> prompt que usei pra gerar o esqueleto do projeto
 ```
 
 ## Fluxo básico de uso
@@ -97,8 +97,8 @@ prompts.md        -> prompt usado para gerar o projeto com IA
 
 ## Bugs conhecidos
 
-Durante as sessões de teste exploratório e revisão de código, foram encontrados 11 bugs/gaps reais, documentados como Issues (sem correção, propositalmente — o objetivo do portfólio é demonstrar a capacidade de encontrar e documentar problemas) e organizados no [Project board](https://github.com/users/maiayuri/projects/1):
+Ao longo das sessões exploratórias (e revisando o código gerado) encontrei 11 bugs/gaps reais. Não corrigi nenhum de propósito — documentei tudo como Issue e organizei no [board do projeto](https://github.com/users/maiayuri/projects/1), que é justamente o que a mentoria pediu: mostrar que consigo achar e reportar problema, não necessariamente resolver tudo.
 
-[Ver todas as issues de bug](https://github.com/maiayuri/PPP-mentoria-2026/issues?q=is%3Aissue+label%3Abug)
+[Ver as issues de bug](https://github.com/maiayuri/PPP-mentoria-2026/issues?q=is%3Aissue+label%3Abug)
 
-Lista completa com detalhes de reprodução em [`docs/casos-de-teste.md`](docs/casos-de-teste.md#gaps-encontrados).
+Os passos de reprodução de cada um estão em [`docs/casos-de-teste.md`](docs/casos-de-teste.md#gaps-encontrados).

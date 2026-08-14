@@ -1,7 +1,9 @@
 # Plano de Testes — API de Controle de Gastos Pessoais
 
+Antes de sair testando tudo de qualquer jeito, montei esse plano rápido pra guiar o que eu ia cobrir e como. Nada muito burocrático, só o essencial pra não esquecer nenhuma frente importante.
+
 ## Objetivo
-Validar as funcionalidades da API de controle de gastos pessoais, cobrindo autenticação, regras de negócio, isolamento entre usuários e tratamento de erros, aplicando as técnicas de teste vistas na mentoria.
+Validar a API de controle de gastos pessoais — autenticação, regras de negócio, isolamento entre usuários e tratamento de erros — aplicando as técnicas de teste que vi ao longo da mentoria.
 
 ## Escopo
 
@@ -34,9 +36,9 @@ Validar as funcionalidades da API de controle de gastos pessoais, cobrindo auten
 | Integração contínua | GitHub Actions | `.github/workflows/ci.yml` |
 
 ## Critérios de aceite
-- Todos os casos de teste críticos (autenticação, isolamento entre usuários, validações de despesa) devem estar cobertos por pelo menos um teste manual ou automatizado
-- Bugs encontrados devem ser documentados como Issues no repositório, sem correção
-- O pipeline de CI deve executar a suíte automatizada a cada push
+- Todo caso crítico (autenticação, isolamento entre usuários, validações de despesa) precisa estar coberto por pelo menos um teste, manual ou automatizado
+- Bug encontrado vira Issue — não corrijo nada, só documento
+- O CI precisa rodar a suíte automatizada a cada push
 
 ## Riscos identificados
-- Dados em memória são perdidos a cada reinício do servidor, o que pode dificultar a reprodução de bugs relatados em sessões anteriores (mitigado documentando o payload usado em cada evidência)
+- Como os dados ficam em memória, tudo se perde quando reinicio o servidor. Isso complica reproduzir um bug de uma sessão anterior se eu não anotar direito o payload usado — por isso fui cuidadoso em registrar isso nas evidências.

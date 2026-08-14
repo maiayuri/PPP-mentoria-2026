@@ -1,11 +1,10 @@
 # Charter Exploratório 02 — Duplicidade, limites numéricos e segurança de token
 
-**Missão:** Explorar cenários de duplicidade de dados (email), limites numéricos/tamanho de payload e a robustez da validação do token JWT (adulteração e expiração).
+Segunda rodada. Peguei as três ideias que anotei no fim da sessão passada e mudei um pouco o foco: dessa vez fui atrás de duplicidade (email repetido de formas diferentes), números nos extremos, e se dava pra enganar o JWT de alguma forma.
 
-**Heurística de apoio:** SFDPOT (foco em **Data** e **Operations**) + checagem de segurança básica no fluxo de autenticação.
+**Missão:** testar duplicidade de dados, limites numéricos/tamanho de payload, e o quanto o token JWT resiste a adulteração e expiração.
 
-**Duração da sessão:** ~25 minutos
-**Ambiente:** API local (`npm run dev`), via curl e scripts Node ad-hoc
+Usei SFDPOT de novo como referência (Data e Operations), mas dessa vez com mais scripts em Node ad-hoc do que curl puro, porque precisava montar token adulterado e coisas assim — deu pra fazer em uns 25 minutos.
 
 ## Notas da sessão
 
@@ -19,9 +18,11 @@
 | 6 | Gerar um token com expiração de 1s, aguardar 1.5s e usá-lo | 401 (token expirado) | 401 | OK — validação de expiração funcionando corretamente |
 
 ## Resumo da sessão
-De 6 variações testadas, 4 revelaram problemas reais: duplicidade de usuários por diferença de maiúsculas/minúsculas no email, erro clássico de ponto flutuante no somatório de valores monetários, ausência de limite superior para o campo `valor`, e tratamento genérico (500) para erros de payload grande que deveriam retornar 413. Por outro lado, a camada de autenticação JWT se mostrou robusta contra adulteração de payload e expiração de token.
+4 de 6 testes acusaram problema. O da duplicidade de email por causa da caixa (maiúscula/minúscula) eu meio que já desconfiava, mas confirmar foi bom. O de ponto flutuante é clássico (0.1 + 0.2 não dá 0.3 em JS, todo mundo já caiu nessa uma vez), só que numa API de gastos isso é chato de verdade — o usuário vai ver um total tipo "R$ 0,30000000000000004" e vai achar que o sistema tá quebrado. Também não tem limite de valor máximo, e payload grande demais estoura como erro 500 em vez de 413.
 
-## Próximas sessões sugeridas
-- Explorar comportamento sob concorrência real (requisições simultâneas de registro com o mesmo email, race condition)
-- Explorar paginação/desempenho com grande volume de despesas por usuário (milhares de registros)
-- Explorar tentativas de login repetidas (ausência de rate limiting / bloqueio por tentativas)
+O lado bom: tentei adulterar o token e forçar expiração, e nos dois casos a API barrou certinho com 401. Pelo menos essa parte está sólida.
+
+## Próximas sessões
+- Testar concorrência de verdade (duas requisições de registro simultâneas pro mesmo email — não só sequenciais)
+- Ver como a API se comporta com muitas despesas cadastradas (será que aguenta bem sem paginação?)
+- Login: tentar várias senhas erradas seguidas e ver se existe algum tipo de bloqueio

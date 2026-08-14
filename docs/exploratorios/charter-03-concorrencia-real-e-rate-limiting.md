@@ -1,11 +1,8 @@
 # Charter Exploratório 03 — Concorrência real e rate limiting
 
-**Missão:** Disparar requisições verdadeiramente concorrentes (via `Promise.all`, sem esperar uma responder antes da próxima) contra endpoints sensíveis a condição de corrida, e verificar se existe alguma proteção contra força bruta no login.
+Última rodada dessa vez. Nas sessões anteriores eu só mandava requisições uma atrás da outra — aqui eu quis simular de verdade duas coisas acontecendo ao mesmo tempo, usando `Promise.all` pra disparar tudo junto sem esperar resposta. Também aproveitei pra checar uma coisa que fiquei curioso desde o começo: dá pra tentar logar quantas vezes eu quiser sem ser bloqueado?
 
-**Heurística de apoio:** SFDPOT (foco em **Operations**), com ênfase em concorrência e abuso de endpoint.
-
-**Duração da sessão:** ~15 minutos
-**Ambiente:** API local (`npm run dev`), via script Node com `fetch` e `Promise.all`
+Rodei um script Node com `fetch` + `Promise.all`, levou uns 15 minutos.
 
 ## Notas da sessão
 
@@ -16,10 +13,10 @@
 | 3 | Disparar 5 exclusões simultâneas da mesma despesa | Apenas 1 deveria ter sucesso (204), as demais 404 | Exatamente 1 sucesso (204), 4 com 404 | OK — sem condição de corrida na exclusão |
 
 ## Resumo da sessão
-Os testes de concorrência real (registro duplicado e exclusão da mesma despesa) não revelaram condições de corrida — resultado esperado, já que o modelo de execução single-threaded do Node.js processa cada handler de forma síncrona até o próximo ponto de I/O, sem interleaving entre as operações de verificação e escrita usadas neste projeto.
+Fiquei meio surpreso, mas de forma boa: nem o registro duplicado nem a exclusão da mesma despesa quebraram sob concorrência real. Pensando depois, faz sentido — o Node roda tudo num único thread e cada handler termina antes do próximo começar, então não teve brecha pra dois requests "colidirem" no meio da checagem.
 
-O ponto de atenção real desta sessão foi a ausência total de rate limiting no endpoint de login: 30 tentativas de senha incorreta em sequência não sofreram nenhum tipo de bloqueio, throttling ou aumento de delay, o que deixa o endpoint vulnerável a ataques de força bruta.
+Já o login me confirmou uma suspeita: não tem rate limiting nenhum. Mandei 30 tentativas com senha errada de uma vez, todas voltaram 401 tranquilamente, sem nenhum bloqueio. Na prática isso deixa a porta aberta pra um ataque de força bruta.
 
-## Próximas sessões sugeridas
-- Explorar o comportamento da API sob um volume alto de despesas por usuário (paginação/desempenho em listagens grandes)
-- Explorar cabeçalhos HTTP de segurança ausentes (ex: CORS, Helmet) já que a API não define nenhum
+## Ideias pra continuar (se der tempo)
+- Ver como a API se sai com um volume grande de despesas cadastradas de uma vez
+- Checar se faltam headers de segurança (CORS, Helmet) — acho que a API não define nenhum hoje

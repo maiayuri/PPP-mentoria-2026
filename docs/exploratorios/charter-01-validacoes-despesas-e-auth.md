@@ -1,11 +1,12 @@
 # Charter Exploratório 01 — Validações de entrada em Despesas e Autenticação
 
-**Missão:** Explorar as validações de entrada dos endpoints de `/auth` e `/despesas`, usando dados de fronteira, tipos inconsistentes e formatos malformados, para encontrar falhas de validação não cobertas pelos casos de teste funcionais.
+Depois de fechar os casos de teste "óbvios", resolvi caçar coisa que eu não tinha coberto ainda: o que acontece quando mando dado torto pra API? Formato errado, tipo trocado, string onde devia ter número. Essa foi minha primeira sessão de verdade nessa linha.
 
-**Heurística de apoio:** SFDPOT (foco em **Data** e **Function**) — variação de tipos de dado, formatos de data/mês, strings malformadas.
+**Missão:** achar falhas de validação em `/auth` e `/despesas` usando dados de fronteira e formatos malformados que os casos de teste "funcionais" não cobrem.
 
-**Duração da sessão:** ~30 minutos
-**Ambiente:** API local (`npm run dev`), via curl
+**Apoio:** usei a heurística SFDPOT como guia mental, focando em **Data** e **Function** — troquei tipos, formatos de data/mês e mandei strings quebradas de propósito.
+
+Rodei isso por uns 30 minutos, com a API local (`npm run dev`) e o curl.
 
 ## Notas da sessão
 
@@ -20,9 +21,10 @@
 | 7 | Registro com email contendo espaços (`"  espaco@teste.com  "`) | Deveria normalizar (trim) ou rejeitar | Salvo literalmente com espaços; login subsequente com o email "limpo" falha com 401 | 🐞 Bug — ver Issue "email não é validado/normalizado" |
 
 ## Resumo da sessão
-De 7 variações testadas, 4 revelaram falhas de validação reais. Os itens 1, 4 e 7 indicam ausência de validação de formato (mês, data, email). O item 6 é mais sério: um erro de parsing do corpo da requisição não tratado está vazando como erro 500, quando deveria ser um 400 (entrada inválida do cliente).
+Testei 7 variações e 4 deram problema — mais do que eu esperava, sinceramente. Os itens 1, 4 e 7 mostram que faltou validar formato mesmo (mês, data, email). O item 6 me chamou mais atenção: um JSON mal formado quebra o parser e o erro vaza como 500, quando deveria ser um 400 simples (culpa é do cliente, não do servidor).
 
-## Próximas sessões sugeridas
-- Explorar limites de tamanho de payload (strings muito longas em `nome`/`descricao`)
-- Explorar concorrência (duas requisições de registro simultâneas com o mesmo email)
-- Explorar expiração e adulteração do token JWT
+## Próximas sessões
+Ainda quero:
+- Ver o que acontece com payloads gigantes (string enorme em `nome`/`descricao`)
+- Testar concorrência de verdade — duas requisições de registro com o mesmo email, disparadas juntas
+- Mexer com o token JWT: adulterar ele e ver se expira direito
