@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { v4: uuidv4 } = require("uuid");
+const { randomUUID } = require("crypto");
 const usuarioModel = require("../models/usuario.model");
 const AppError = require("../errors/AppError");
 
@@ -17,7 +17,7 @@ function registrar({ nome, email, senha }) {
   }
 
   const usuario = {
-    id: uuidv4(),
+    id: randomUUID(),
     nome,
     email,
     senhaHash: bcrypt.hashSync(senha, 10),

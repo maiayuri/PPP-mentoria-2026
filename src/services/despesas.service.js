@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require("uuid");
+const { randomUUID } = require("crypto");
 const despesaModel = require("../models/despesa.model");
 const AppError = require("../errors/AppError");
 const { CATEGORIAS_VALIDAS } = require("../utils/categorias");
@@ -20,7 +20,7 @@ function criar(usuarioId, { valor, categoria, data, descricao }) {
   }
 
   const despesa = {
-    id: uuidv4(),
+    id: randomUUID(),
     usuarioId,
     valor,
     categoria,
