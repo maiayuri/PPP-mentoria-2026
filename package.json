@@ -1,7 +1,7 @@
 {
   "name": "portfolio-mentoria",
   "version": "1.0.0",
-  "description": "",
+  "description": "API REST de controle de gastos pessoais, projeto de portfolio da mentoria de testes de software",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
@@ -11,7 +11,7 @@
     "test:performance": "node performance/load-test.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Yuri Maia",
   "license": "MIT",
   "type": "commonjs",
   "dependencies": {
